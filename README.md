@@ -37,6 +37,30 @@ This program currently supports conversion between the ILE (Cantonese Pinyin), J
 This script requires Python 3.12 or above.
 
 
+## Testing
+
+Making local edits and want to test your code? First ensure that you have pytest installed:
+```
+$ pytest --version
+pytest 9.0.3
+```
+
+If your command line does not display a version number of 9.0.0 or higher, install/update pytest:
+```
+$ pip install -U pytest
+```
+
+To run the full suite of unit tests on this module, simply navigate to the main directory in your command line and run `pytest` (default output) or `pytest -q` ("quiet" reporting mode):
+```
+$ pytest -q
+...                                                                      [100%]
+8 passed in 0.02s
+```
+
+The test files are located in the `tests/` directory.
+Check out the [pytest documentation](https://docs.pytest.org/en/9.0.x/) for information on how to run select test functions or write your own test cases.
+
+
 ## Resources
 
 Sources and further reading:
