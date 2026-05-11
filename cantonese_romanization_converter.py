@@ -34,13 +34,13 @@ ile_finals = (
     '',
     'aa', 'aai', 'aau', 'aam', 'aan', 'aang', 'aap', 'aat', 'aak',
     'a', 'ai', 'au', 'am', 'an', 'ang', 'ap', 'at', 'ak',
-    'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
-    'oe', 'oeng', 'oet', 'oek',
-    'oey', 'oen', 'oet',
-    'e', 'ei', 'eu', 'em', 'eng', 'ep', 'ek',
-    'u', 'ui', 'un', 'ung', 'ut', 'uk',
-    'y', 'yn', 'yt',
+    'e', 'ei', 'eu', 'em', 'eng', 'ep', 'et', 'ek',
     'i', 'iu', 'im', 'in', 'ing', 'ip', 'it', 'ik',
+    'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
+    'u', 'ui', 'un', 'ung', 'ut', 'uk',
+    'oey', 'oen', 'oet',
+    'oe', 'oeng', 'oet', 'oek',
+    'y', 'yn', 'yt',
 )
 
 ile_stop_consonants = ('p', 't', 'k')
@@ -63,13 +63,13 @@ jyutping_finals = (
     '',
     'aa', 'aai', 'aau', 'aam', 'aan', 'aang', 'aap', 'aat', 'aak',
     'a', 'ai', 'au', 'am', 'an', 'ang', 'ap', 'at', 'ak',
-    'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
-    'oe', 'oeng', 'oet', 'oek',
-    'eoi', 'eon', 'eot',
-    'e', 'ei', 'eu', 'em', 'eng', 'ep', 'ek',
-    'u', 'ui', 'un', 'ung', 'ut', 'uk',
-    'yu', 'yun', 'yut',
+    'e', 'ei', 'eu', 'em', 'eng', 'ep', 'et', 'ek',
     'i', 'iu', 'im', 'in', 'ing', 'ip', 'it', 'ik',
+    'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
+    'u', 'ui', 'un', 'ung', 'ut', 'uk',
+    'eoi', 'eon', 'eot',
+    'oe', 'oeng', 'oet', 'oek',
+    'yu', 'yun', 'yut',
 )
 
 jyutping_stop_consonants = ('p', 't', 'k')
@@ -92,13 +92,13 @@ yale_finals = (
     '',
     'a', 'aai', 'aau', 'aam', 'aan', 'aang', 'aap', 'aat', 'aak',
     'a', 'ai', 'au', 'am', 'an', 'ang', 'ap', 'at', 'ak',
-    'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
-    'eu', 'eung', 'eut', 'euk',
-    'eui', 'eun', 'eut',
-    'e', 'ei', 'eu', 'em', 'eng', 'ep', 'ek',
-    'u', 'ui', 'un', 'ung', 'ut', 'uk',
-    'yu', 'yun', 'yut',
+    'e', 'ei', 'eu', 'em', 'eng', 'ep', 'et', 'ek',
     'i', 'iu', 'im', 'in', 'ing', 'ip', 'it', 'ik',
+    'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
+    'u', 'ui', 'un', 'ung', 'ut', 'uk',
+    'eui', 'eun', 'eut',
+    'eu', 'eung', 'eut', 'euk',
+    'yu', 'yun', 'yut',
 )
 
 yale_ending_consonants = ('m', 'n', 'ng', 'p', 't', 'k')
