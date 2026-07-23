@@ -17,6 +17,7 @@ class System(Enum):
     ILE = 1
     JYUTPING = 2
     YALE = 3
+    CUSTOM = 4
 
 
 ### SYSTEM: ILE
@@ -33,14 +34,14 @@ ile_initials = (
 ile_finals = (
     '',
     'aa', 'aai', 'aau', 'aam', 'aan', 'aang', 'aap', 'aat', 'aak',
+    'oey', 'oen', 'oet',
+    'oe', 'oeng', 'oet', 'oek',
+    'y', 'yn', 'yt',
     'a', 'ai', 'au', 'am', 'an', 'ang', 'ap', 'at', 'ak',
     'e', 'ei', 'eu', 'em', 'eng', 'ep', 'et', 'ek',
     'i', 'iu', 'im', 'in', 'ing', 'ip', 'it', 'ik',
     'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
     'u', 'ui', 'un', 'ung', 'ut', 'uk',
-    'oey', 'oen', 'oet',
-    'oe', 'oeng', 'oet', 'oek',
-    'y', 'yn', 'yt',
 )
 
 ile_stop_consonants = ('p', 't', 'k')
@@ -62,14 +63,14 @@ jyutping_initials = (
 jyutping_finals = (
     '',
     'aa', 'aai', 'aau', 'aam', 'aan', 'aang', 'aap', 'aat', 'aak',
+    'eoi', 'eon', 'eot',
+    'oe', 'oeng', 'oet', 'oek',
+    'yu', 'yun', 'yut',
     'a', 'ai', 'au', 'am', 'an', 'ang', 'ap', 'at', 'ak',
     'e', 'ei', 'eu', 'em', 'eng', 'ep', 'et', 'ek',
     'i', 'iu', 'im', 'in', 'ing', 'ip', 'it', 'ik',
     'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
     'u', 'ui', 'un', 'ung', 'ut', 'uk',
-    'eoi', 'eon', 'eot',
-    'oe', 'oeng', 'oet', 'oek',
-    'yu', 'yun', 'yut',
 )
 
 jyutping_stop_consonants = ('p', 't', 'k')
@@ -91,14 +92,14 @@ yale_initials = (
 yale_finals = (
     '',
     'a', 'aai', 'aau', 'aam', 'aan', 'aang', 'aap', 'aat', 'aak',
+    'eui', 'eun', 'eut',
+    'eu', 'eung', 'eut', 'euk',
+    'yu', 'yun', 'yut',
     'a', 'ai', 'au', 'am', 'an', 'ang', 'ap', 'at', 'ak',
     'e', 'ei', 'eu', 'em', 'eng', 'ep', 'et', 'ek',
     'i', 'iu', 'im', 'in', 'ing', 'ip', 'it', 'ik',
     'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
     'u', 'ui', 'un', 'ung', 'ut', 'uk',
-    'eui', 'eun', 'eut',
-    'eu', 'eung', 'eut', 'euk',
-    'yu', 'yun', 'yut',
 )
 
 yale_ending_consonants = ('m', 'n', 'ng', 'p', 't', 'k')
@@ -129,6 +130,34 @@ def deconstruct_yale_vowel(vowel_with_tone, is_low_tone):
         except ValueError:
             pass
     raise ValueError
+
+
+### SYSTEM: JUSTIN'S CUSTOM ROMANIZATION
+# note: tones have not been implemented
+
+custom_initials = (
+    '',
+    'b', 'p', 'm', 'f',
+    'd', 't', 'n', 'l',
+    'g', 'k', 'ng', 'h',
+    'gw', 'kw', 'w',
+    'z', 'c', 's', 'y',
+)
+
+custom_finals = (
+    '',
+    'aa', 'aai', 'aau', 'aam', 'aan', 'aang', 'aap', 'aat', 'aak',
+    'eoi', 'eon', 'eot',
+    'eu', 'eung', 'eut', 'euk',
+    'ü', 'ün', 'üt',
+    'a', 'ai', 'au', 'am', 'an', 'ang', 'ap', 'at', 'ak',
+    'e', 'ei', 'eu', 'em', 'eng', 'ep', 'et', 'ek',
+    'ee', 'eeu', 'eem', 'een', 'ing', 'eep', 'eet', 'ik',
+    'o', 'oi', 'ou', 'on', 'ong', 'ot', 'ok',
+    'oo', 'ooi', 'oon', 'ung', 'oot', 'uk',
+)
+
+custom_ending_consonants = ('m', 'n', 'ng', 'p', 't', 'k')
 
 
 ### ENCODING
@@ -256,6 +285,7 @@ def encode(text, origin_system):
         case System.ILE: encoded = encode_ile(syllables)
         case System.JYUTPING: encoded = encode_jyutping(syllables)
         case System.YALE: encoded = encode_yale(syllables)
+        case System.CUSTOM: raise RuntimeError("Custom encoding not supported.")
         case _: encoded = text
     return encoded
 
@@ -319,12 +349,29 @@ def decode_yale(syllables):
             decoded.append(str(syllable))
     return decoded
 
+def decode_custom(syllables):
+    decoded = []
+    for syllable in syllables:
+        if type(syllable) == tuple:
+            initial = custom_initials[syllable[0]]
+            final = custom_finals[syllable[1]]
+            alveolar = ''
+            if initial in ('c', 'z') and len(final) != 0:
+                final_vowel = next((final[0:-len(x)] for x in custom_ending_consonants if final.endswith(x)), final)
+                if final_vowel not in ('ee', 'i', 'ü'):
+                    alveolar = 'h'
+            decoded.append('{}{}{}'.format(initial, alveolar, final))
+        else:
+            decoded.append(str(syllable))
+    return decoded
+
 def decode(syllables, target_system):
     assert target_system in System
     match target_system:
         case System.ILE: decoded = decode_ile(syllables)
         case System.JYUTPING: decoded = decode_jyutping(syllables)
         case System.YALE: decoded = decode_yale(syllables)
+        case System.CUSTOM: decoded = decode_custom(syllables)
         case _: decoded = syllables
     return ' '.join(decoded)
 
