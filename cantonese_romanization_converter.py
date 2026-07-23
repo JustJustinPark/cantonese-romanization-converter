@@ -358,7 +358,7 @@ def decode_custom(syllables):
             alveolar = ''
             if initial in ('c', 'z') and len(final) != 0:
                 final_vowel = next((final[0:-len(x)] for x in custom_ending_consonants if final.endswith(x)), final)
-                if final_vowel not in ('ee', 'i', 'ü'):
+                if final_vowel not in ('a', 'ee', 'i', 'ü'):
                     alveolar = 'h'
             decoded.append('{}{}{}'.format(initial, alveolar, final))
         else:
